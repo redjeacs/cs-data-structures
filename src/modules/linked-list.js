@@ -3,11 +3,12 @@ import Node from './node';
 export default class LinkedList {
   constructor() {
     this.head = null;
+    this.tail = null;
     this.size = 0;
   }
 
-  append(value) {
-    const newNode = new Node(value);
+  append(key, value) {
+    const newNode = new Node(key, value);
     if (!this.head) {
       this.head = newNode;
     } else {
@@ -20,22 +21,22 @@ export default class LinkedList {
     this.size++;
   }
 
-  prepend(value) {
-    const newNode = new Node(value);
+  prepend(key, value) {
+    const newNode = new Node(key, value);
     newNode.next = this.head;
     this.head = newNode;
     this.size++;
   }
 
-  size() {
+  sizeOfList() {
     return this.size;
   }
 
-  head() {
+  headNode() {
     return this.head;
   }
 
-  tail() {
+  tailNode() {
     let current = this.head;
     while (current.next) {
       current = current.next;
@@ -61,20 +62,20 @@ export default class LinkedList {
     this.size--;
   }
 
-  contains(value) {
+  contains(key) {
     let current = this.head;
     for (let i = 0; i < this.size; i++) {
-      if (current.value == value) return true;
+      if (current.key == key) return true;
       else current = current.next;
     }
     return false;
   }
 
-  find(value) {
+  find(key) {
     let current = this.head;
     let index = 0;
     for (let i = 0; i < this.size; i++) {
-      if (current.value == value) return index;
+      if (current.key == key) return index;
       else {
         current = current.next;
         index++;
@@ -87,18 +88,18 @@ export default class LinkedList {
     let current = this.head;
     let string = '';
     for (let i = 0; i < this.size; i++) {
-      string += `( ${current.value} ) -> `;
+      string += `( ${current.key} ) -> `;
       current = current.next;
     }
     string += 'null';
     return string;
   }
 
-  insertAt(value, index) {
-    if (this.head == null) this.append(value);
+  insertAt(key, value, index) {
+    if (this.head == null) this.append(key, value);
     let current = this.head;
     let previous = null;
-    const newNode = new Node(value);
+    const newNode = new Node(key, value);
     if (index <= 0 || index >= this.size - 1) {
       console.log('please enter a correct index');
       return null;
@@ -116,6 +117,12 @@ export default class LinkedList {
 
     let current = this.head;
     let previous = null;
+
+    if (index == 0) {
+      this.head = current.next;
+      this.size--;
+      return;
+    }
 
     for (let i = 0; i < index; i++) {
       previous = current;
