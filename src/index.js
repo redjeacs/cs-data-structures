@@ -1,20 +1,8 @@
 import './styles.css';
-import HashMap from './modules/hash-map';
+import BinarySortTree from './modules/binary-search-tree';
 
-const test = new HashMap();
+const test = new BinarySortTree([
+  1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
+]);
 
-test.set('apple', 'red');
-test.set('banana', 'yellow');
-test.set('carrot', 'orange');
-test.set('dog', 'brown');
-test.set('elephant', 'gray');
-test.set('frog', 'green');
-test.set('grape', 'purple');
-test.set('hat', 'black');
-test.set('ice cream', 'white');
-test.set('jacket', 'blue');
-test.set('kite', 'pink');
-test.set('lion', 'golden');
-test.set('moon', 'silver');
-
-console.log(test);
+console.log(test.buildTree());
