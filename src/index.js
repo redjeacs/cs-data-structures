@@ -6,5 +6,5 @@ const test = new BinarySortTree([
 ]);
 
 test.insert(2);
-console.log(test.preOrderForEach((node) => console.log(node.value)));
+console.log(test.postOrderForEach((node) => console.log(node.value)));
 test.prettyPrint();
