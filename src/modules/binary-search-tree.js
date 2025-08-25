@@ -123,4 +123,24 @@ export default class BinarySortTree {
     callback(root);
     this.inOrderForEach(callback, root.right);
   }
+
+  height(value, currentNode = this.find(value)) {
+    if (!currentNode) return null;
+    const leftHeight = this.height(value, currentNode.left);
+    const righthHeight = this.height(value, currentNode.right);
+
+    return Math.max(leftHeight, righthHeight) + 1;
+  }
+
+  depth(value, currentNode = this.root) {
+    if (currentNode == null) return null;
+    if (currentNode.value > value) {
+      return 1 + this.depth(value, currentNode.left);
+    }
+    if (currentNode.value < value) {
+      return 1 + this.depth(value, currentNode.right);
+    } else {
+      return 0;
+    }
+  }
 }
