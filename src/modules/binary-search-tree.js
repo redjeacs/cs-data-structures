@@ -81,4 +81,19 @@ export default class BinarySortTree {
     if (currentNode.value > value) return this.find(value, currentNode.left);
     if (currentNode.value < value) return this.find(value, currentNode.right);
   }
+
+  levelOrderForEach(callback, root = this.root) {
+    if (callback == null || typeof callback !== 'function')
+      throw new Error('Callback function required');
+    if (root == null) return null;
+    let queue = [root];
+    let visitedNode = 0;
+    while (queue.length > visitedNode) {
+      const current = queue[visitedNode];
+      callback(current);
+      visitedNode++;
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+  }
 }

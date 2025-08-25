@@ -6,6 +6,5 @@ const test = new BinarySortTree([
 ]);
 
 test.insert(2);
-test.deleteItem(1);
+
 test.prettyPrint();
-console.log(test.find(2));
