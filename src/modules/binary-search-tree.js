@@ -96,4 +96,12 @@ export default class BinarySortTree {
       if (current.right) queue.push(current.right);
     }
   }
+  preOrderForEach(callback, root = this.root) {
+    if (callback == null || typeof callback !== 'function')
+      throw new Error('Callback function required');
+    if (root == null) return null;
+    callback(root);
+    this.preOrderForEach(callback, root.left);
+    this.preOrderForEach(callback, root.right);
+  }
 }
