@@ -125,15 +125,15 @@ export default class BinarySortTree {
   }
 
   height(value, currentNode = this.find(value)) {
-    if (!currentNode) return null;
+    if (currentNode == null) return 0;
     const leftHeight = this.height(value, currentNode.left);
-    const righthHeight = this.height(value, currentNode.right);
+    const rightHeight = this.height(value, currentNode.right);
 
-    return Math.max(leftHeight, righthHeight) + 1;
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 
   depth(value, currentNode = this.root) {
-    if (currentNode == null) return null;
+    if (currentNode == null) return 0;
     if (currentNode.value > value) {
       return 1 + this.depth(value, currentNode.left);
     }
@@ -142,5 +142,24 @@ export default class BinarySortTree {
     } else {
       return 0;
     }
+  }
+
+  isBalanced() {
+    return this.isBalancedHelper(this.root) > 0 ? 'True' : false;
+  }
+
+  isBalancedHelper(root) {
+    if (root == null) return 0;
+    let leftHeight = this.isBalancedHelper(root.left);
+    let rightHeight = this.isBalancedHelper(root.right);
+
+    if (
+      leftHeight == -1 ||
+      rightHeight == -1 ||
+      Math.abs(leftHeight - rightHeight) > 1
+    )
+      return -1;
+
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 }
