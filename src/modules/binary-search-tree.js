@@ -50,4 +50,35 @@ export default class BinarySortTree {
     }
     return currentNode;
   }
+
+  getSuccessor(curr) {
+    curr = curr.right;
+    while (curr !== null && curr.left !== null) {
+      curr = curr.left;
+    }
+    return curr;
+  }
+
+  deleteItem(value, currentNode = this.root) {
+    if (currentNode == null) return currentNode;
+    if (currentNode.value > value) {
+      currentNode.left = this.deleteItem(value, currentNode.left);
+    } else if (currentNode.value < value) {
+      currentNode.right = this.deleteItem(value, currentNode.right);
+    } else {
+      if (currentNode.left == null) return currentNode.right;
+      if (currentNode.right == null) return currentNode.left;
+
+      let succ = this.getSuccessor(currentNode);
+      currentNode.value = succ.value;
+      currentNode.right = this.deleteItem(succ.value, currentNode.right);
+    }
+    return currentNode;
+  }
+
+  find(value, currentNode = this.root) {
+    if (currentNode == null || currentNode.value == value) return currentNode;
+    if (currentNode.value > value) return this.find(value, currentNode.left);
+    if (currentNode.value < value) return this.find(value, currentNode.right);
+  }
 }
