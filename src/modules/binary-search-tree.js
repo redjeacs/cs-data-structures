@@ -162,4 +162,12 @@ export default class BinarySortTree {
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  reBalance() {
+    const array = [];
+    this.inOrderForEach((node) => {
+      array.push(node.value);
+    });
+    this.root = this.buildTree(array);
+  }
 }
