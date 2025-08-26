@@ -1,7 +1,6 @@
 import './styles.css';
-import { possibleMoves, Node } from './modules/knight-travails';
+import { Graph } from './modules/knight-travails';
 
-const test = new Node(1, 3);
+const test = new Graph();
 
-possibleMoves(test);
 console.log(test);
